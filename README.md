@@ -11,8 +11,8 @@
 int function(int);
 
 #define DEFINE_JUMPER(x) \
-        void *_godl_##x = (void*)0; \
-        __asm__(".global "#x"\n\t"#x":\n\tmovq _godl_"#x"(%rip),%rax\n\tjmp *%rax\n")
+        void *_dyl_##x = (void*)0; \
+        __asm__(".global "#x"\n\t"#x":\n\tmovq _dyl_"#x"(%rip),%rax\n\tjmp *%rax\n")
   
 DEFINE_JUMPER(function);
 
@@ -20,23 +20,23 @@ DEFINE_JUMPER(function);
 import "C"
 
 import (
-	"github.com/sudachen/go-dl/dl"
+	"go-ml.dev/dyl"
 	"runtime"
 	"unsafe"
 )
 
 func init() {
-    urlbase := "https://github.com/sudachen/go-dl/releases/download/initial/"
+    urlbase := "https://github.com/sudachen/go-ml/nativelibs/releases/download/files/"
     if runtime.GOOS == "linux" && runtime.GOARCH == "amd64"{
-        so := dl.Load(
-            dl.Cache("dl/go-dl/libfunction.so"),
-            dl.LzmaExternal(urlbase+"libfunction_lin64.lzma"))
+        so := dyl.Load(
+            dyl.Cache("go-ml/dyl/libfunction.so"),
+            dyl.LzmaExternal(urlbase+"libfunction_lin64.lzma"))
     } else if runtime.GOOS == "windows" && runtime.GOARCH == "amd64" {
-        so := dl.Load(
-            dl.Cache("dl/go-dl/function.dll"),
-            dl.LzmaExternal(urlbase+"libfunction_win64.lzma"))
+        so := dyl.Load(
+            dyl.Cache("go-ml/dyl/function.dll"),
+            dyl.LzmaExternal(urlbase+"libfunction_win64.lzma"))
     }
-    so.Bind("function",unsafe.Pointer(&C._godl_function))
+    so.Bind("function",unsafe.Pointer(&C._dyl_function))
 }
 
 func main() {

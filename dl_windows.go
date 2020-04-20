@@ -1,6 +1,6 @@
 // +build windows
 
-package dl
+package dyl
 
 import (
 	"os"

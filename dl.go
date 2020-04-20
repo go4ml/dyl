@@ -2,7 +2,7 @@
 //Package dl implements loading shared libraries and binding functions
 //
 
-package dl
+package dyl
 
 import (
 	"bytes"

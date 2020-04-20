@@ -1,41 +1,41 @@
 package tests
 
 import (
-	"github.com/sudachen/go-dl/dl"
+	"go-ml.dev/dyl"
 	"gotest.tools/assert"
 	"testing"
 )
 
-const localLibSoName = "/tmp/go-dl-test/" + libSoName
+const localLibSoName = "/tmp/go-ml-dyl-test/" + libSoName
 const externalLibSoLzma = "https://github.com/sudachen/go-dl/releases/download/initial/" + libSoLzma
 const externalLibSoGzip = "https://github.com/sudachen/go-dl/releases/download/initial/" + libSoGzip
 const externalLibSo = "https://github.com/sudachen/go-dl/releases/download/initial/" + libSoName
 
 func init() {
-	dl.Custom(localLibSoName).Preload(
-		dl.LzmaExternal(externalLibSoLzma))
+	dyl.Custom(localLibSoName).Preload(
+		dyl.LzmaExternal(externalLibSoLzma))
 }
 
 func Test_LoadCustom(t *testing.T) {
-	so := dl.Load(
-		dl.OnError(func(err error) {
+	so := dyl.Load(
+		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dl.Custom(localLibSoName))
+		dyl.Custom(localLibSoName))
 	assert.Assert(t, so.Ok())
 	so.Bind("function", functionPtr())
 	assert.Assert(t, function(1) == 2)
 }
 
 func Test_LoadLzmaExternal(t *testing.T) {
-	err := dl.Cached("dl/.go-dl-test/loadlzmaexternal.so").Remove()
+	err := dyl.Cached("go-ml/dyl/.dyl-test/loadlzmaexternal.so").Remove()
 	assert.NilError(t, err)
-	so := dl.Load(
-		dl.OnError(func(err error) {
+	so := dyl.Load(
+		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dl.Cached("dl/.go-dl-test/loadlzmaexternal.so"),
-		dl.LzmaExternal(externalLibSoLzma))
+		dyl.Cached("go-ml/dyl/.dyl-test/loadlzmaexternal.so"),
+		dyl.LzmaExternal(externalLibSoLzma))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
 	so.Bind("function", functionPtr())
@@ -43,14 +43,14 @@ func Test_LoadLzmaExternal(t *testing.T) {
 }
 
 func Test_LoadGzipExternal(t *testing.T) {
-	err := dl.Cached("dl/.go-dl-test/loadgzipexternal" + SoExt).Remove()
+	err := dyl.Cached("go-ml/dyl/.dyl-test/loadgzipexternal" + SoExt).Remove()
 	assert.NilError(t, err)
-	so := dl.Load(
-		dl.OnError(func(err error) {
+	so := dyl.Load(
+		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dl.Cached("dl/.go-dl-test/loadgzipexternal"+SoExt),
-		dl.GzipExternal(externalLibSoGzip))
+		dyl.Cached("go-ml/dyl/.dyl-test/loadgzipexternal"+SoExt),
+		dyl.GzipExternal(externalLibSoGzip))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
 	so.Bind("function", functionPtr())
@@ -58,14 +58,14 @@ func Test_LoadGzipExternal(t *testing.T) {
 }
 
 func Test_LoadUncompressedExternal(t *testing.T) {
-	err := dl.Cached("dl/.go-dl-test/loadexternal.so").Remove()
+	err := dyl.Cached("go-ml/dyl/.dyl-test/loadexternal.so").Remove()
 	assert.NilError(t, err)
-	so := dl.Load(
-		dl.OnError(func(err error) {
+	so := dyl.Load(
+		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dl.Cached("dl/.go-dl-test/loadexternal"+SoExt),
-		dl.External(externalLibSo))
+		dyl.Cached("go-ml/dyl/.dyl-test/loadexternal"+SoExt),
+		dyl.External(externalLibSo))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
 	so.Bind("function", functionPtr())
@@ -73,18 +73,18 @@ func Test_LoadUncompressedExternal(t *testing.T) {
 }
 
 func Test_LoadCached(t *testing.T) {
-	err := dl.Cached("dl/go-dl/" + libSoName).Remove()
+	err := dyl.Cached("go-ml/dyl/" + libSoName).Remove()
 	assert.NilError(t, err)
-	dl.Cached("dl/go-dl/"+libSoName).Preload(
-		dl.LzmaExternal(externalLibSoLzma),
-		dl.OnError(func(err error) {
+	dl.Cached("go-ml/dyl/"+libSoName).Preload(
+		dyl.LzmaExternal(externalLibSoLzma),
+		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}))
-	so := dl.Load(
-		dl.OnError(func(err error) {
+	so := dyl.Load(
+		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dl.Cached("dl/go-dl/"+libSoName))
+		dyl.Cached("go-ml/dyl/"+libSoName))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
 	so.Bind("function", functionPtr())
