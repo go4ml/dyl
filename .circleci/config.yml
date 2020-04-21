@@ -19,8 +19,6 @@ jobs:
       - checkout
       - run: make build
       - run: make run-tests-1
-      #- run: /usr/local/bin/cc-test-reporter after-build -t gocov
-
       - run: make win-build
       - run: mkdir bin
       - run: cp tests.exe bin && chmod a+rx bin/tests.exe
