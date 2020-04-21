@@ -1,8 +1,8 @@
 
-[![CircleCI](https://circleci.com/gh/sudachen/go-dl.svg?style=svg)](https://circleci.com/gh/sudachen/go-dl)
-[![Maintainability](https://api.codeclimate.com/v1/badges/3b8d5bd3fe992a6ce7f2/maintainability)](https://codeclimate.com/github/sudachen/go-dl/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/3b8d5bd3fe992a6ce7f2/test_coverage)](https://codeclimate.com/github/sudachen/go-dl/test_coverage)
-[![Go Report Card](https://goreportcard.com/badge/github.com/sudachen/go-dl)](https://goreportcard.com/report/github.com/sudachen/go-dl)
+[![CircleCI](https://circleci.com/gh/go-ml-dev/dyl.svg?style=svg)](https://circleci.com/gh/go-ml-dev/dyl)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e480a564c6ba1572581/maintainability)](https://codeclimate.com/github//go-ml-dev/dyl/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1e480a564c6ba1572581/test_coverage)](https://codeclimate.com/github/go-ml-dev/dyl/test_coverage)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go-ml-dev/dyl)](https://goreportcard.com/report/github.com/go-ml-dev/dyl)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ```golang
@@ -30,11 +30,11 @@ func init() {
     if runtime.GOOS == "linux" && runtime.GOARCH == "amd64"{
         so := dyl.Load(
             dyl.Cache("go-ml/dyl/libfunction.so"),
-            dyl.LzmaExternal(urlbase+"libfunction_lin64.lzma"))
+            dyl.LzmaExternal(urlbase+"libfunction_lin64.xz"))
     } else if runtime.GOOS == "windows" && runtime.GOARCH == "amd64" {
         so := dyl.Load(
             dyl.Cache("go-ml/dyl/function.dll"),
-            dyl.LzmaExternal(urlbase+"libfunction_win64.lzma"))
+            dyl.LzmaExternal(urlbase+"libfunction_win64.xz"))
     }
     so.Bind("function",unsafe.Pointer(&C._dyl_function))
 }

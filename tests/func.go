@@ -4,8 +4,8 @@ package tests
 int function(int);
 
 #define DEFINE_JUMPER(x) \
-        void *_godl_##x = (void*)0; \
-        __asm__(".global "#x"\n\t"#x":\n\tmovq _godl_"#x"(%rip),%rax\n\tjmp *%rax\n")
+        void *_dyl_##x = (void*)0; \
+        __asm__(".global "#x"\n\t"#x":\n\tmovq _dyl_"#x"(%rip),%rax\n\tjmp *%rax\n")
 
 DEFINE_JUMPER(function);
 */
@@ -17,5 +17,5 @@ func function(i int) int {
 }
 
 func functionPtr() unsafe.Pointer {
-	return unsafe.Pointer(&C._godl_function)
+	return unsafe.Pointer(&C._dyl_function)
 }
