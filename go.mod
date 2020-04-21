@@ -1,4 +1,4 @@
-module go-ml.dev/dyl
+module go-ml.dev/pkg/dyl
 
 go 1.13
 
