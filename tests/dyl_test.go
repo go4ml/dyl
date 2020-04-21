@@ -6,10 +6,11 @@ import (
 	"testing"
 )
 
+const baseurl = "https://github.com/go-ml-dev/nativelibs/releases/download/files/"
 const localLibSoName = "/tmp/go-ml-dyl-test/" + libSoName
-const externalLibSoLzma = "https://github.com/sudachen/go-dl/releases/download/initial/" + libSoLzma
-const externalLibSoGzip = "https://github.com/sudachen/go-dl/releases/download/initial/" + libSoGzip
-const externalLibSo = "https://github.com/sudachen/go-dl/releases/download/initial/" + libSoName
+const externalLibSoLzma = baseurl + libSoLzma
+const externalLibSoGzip = baseurl + libSoGzip
+const externalLibSo = baseurl + libSoName
 
 func init() {
 	dyl.Custom(localLibSoName).Preload(
@@ -58,7 +59,7 @@ func Test_LoadGzipExternal(t *testing.T) {
 }
 
 func Test_LoadUncompressedExternal(t *testing.T) {
-	err := dyl.Cached("go-ml/dyl/.dyl-test/loadexternal.so").Remove()
+	err := dyl.Cached("go-ml/dyl/.dyl-test/loadexternal" + SoExt).Remove()
 	assert.NilError(t, err)
 	so := dyl.Load(
 		dyl.OnError(func(err error) {
@@ -75,7 +76,7 @@ func Test_LoadUncompressedExternal(t *testing.T) {
 func Test_LoadCached(t *testing.T) {
 	err := dyl.Cached("go-ml/dyl/" + libSoName).Remove()
 	assert.NilError(t, err)
-	dl.Cached("go-ml/dyl/"+libSoName).Preload(
+	dyl.Cached("go-ml/dyl/"+libSoName).Preload(
 		dyl.LzmaExternal(externalLibSoLzma),
 		dyl.OnError(func(err error) {
 			assert.NilError(t, err)

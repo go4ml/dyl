@@ -1,4 +1,13 @@
 ~*
 .*
-
+*.out
+*.text
+*.exe
+*.test
+*.zip
+*.gzip
+*.xz
+*.so
+*.dll
+gocov.txt
 

@@ -8,7 +8,6 @@ import (
 	"bytes"
 	"compress/gzip"
 	"fmt"
-	"github.com/sudachen/go-foo/fu"
 	"github.com/ulikunitz/xz"
 	"golang.org/x/xerrors"
 	"io"
@@ -61,12 +60,12 @@ Load finds and loads shared library. Can download library form the Internet if i
 */
 func Load(a ...interface{}) SO {
 	so := SO{
-		verbose: fu.IfsOption(Verbose(func(text string, vl int) {
+		verbose: IfsOption(Verbose(func(text string, vl int) {
 			if vl == 0 {
 				fmt.Println(text)
 			}
 		}), a).(Verbose),
-		onerror: fu.IfsOption(OnError(func(err error) {
+		onerror: IfsOption(OnError(func(err error) {
 			panic(err.Error())
 		}), a).(OnError),
 	}
@@ -191,16 +190,16 @@ func (c Cached) Preload(a ...interface{}) {
 }
 
 func preload(sopath string, a ...interface{}) (ok bool) {
-	verbose := fu.IfsOption(Verbose(func(text string, vl int) {
+	verbose := IfsOption(Verbose(func(text string, vl int) {
 		if vl == 0 {
 			fmt.Println(text)
 		}
 	}), a).(Verbose)
-	onerror := fu.IfsOption(OnError(func(err error) {
+	onerror := IfsOption(OnError(func(err error) {
 		panic(err.Error())
 	}), a).(OnError)
 
-	external, zt := fu.StrMultiOption(a, External(""), GzipExternal(""), LzmaExternal(""))
+	external, zt := StrMultiOption(a, External(""), GzipExternal(""), LzmaExternal(""))
 	if external != "" {
 
 		bf := bytes.Buffer{}

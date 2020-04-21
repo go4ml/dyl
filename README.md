@@ -26,7 +26,7 @@ import (
 )
 
 func init() {
-    urlbase := "https://github.com/sudachen/go-ml/nativelibs/releases/download/files/"
+    urlbase := "https://github.com/go-ml-dev/nativelibs/releases/download/files/"
     if runtime.GOOS == "linux" && runtime.GOARCH == "amd64"{
         so := dyl.Load(
             dyl.Cache("go-ml/dyl/libfunction.so"),

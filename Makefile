@@ -18,9 +18,9 @@ run-tests-1:
 	./tests.test -test.v=true -test.coverprofile=c.out
 
 run-tests-2:
-	sed -i -e '\:^github.com/sudachen/go-foo/:d' c.out
-	sed -i -e 's:github.com/sudachen/go-dl/::g' c.out
-	awk '/\.go/{print "github.com/sudachen/go-dl/"$$0}/^mode/{print $$0}' < c.out > gocov.txt
+	sed -i -e 's:go-ml.dev/dyl/::g' c.out
+	sed -i -e '\:tests/:d' c.out
+	awk '/\.go/{print "go-ml.dev/dyl/"$$0}/^mode/{print $$0}' < c.out > gocov.txt
 
 run-tests: run-tests-1 run-tests-2
 
