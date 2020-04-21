@@ -18,7 +18,7 @@ run-tests-1:
 	./tests.test -test.v=true -test.coverprofile=c.out
 
 run-tests-2:
-	sed -i -e 's:go-ml.dev/dyl/::g' c.out
+	sed -i -e 's:go-ml.dev/pkg/dyl/::g' c.out
 	sed -i -e '\:tests/:d' c.out
 	awk '/\.go/{print "go-ml.dev/pkg/dyl/"$$0}/^mode/{print $$0}' < c.out > gocov.txt
 
