@@ -20,7 +20,7 @@ DEFINE_JUMPER(function);
 import "C"
 
 import (
-	"go-ml.dev/dyl"
+	"go4ml.xyz/dyl"
 	"runtime"
 	"unsafe"
 )
