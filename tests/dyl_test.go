@@ -1,7 +1,7 @@
 package tests
 
 import (
-	"go-ml.dev/pkg/dyl"
+	"go4ml.xyz/dyl"
 	"gotest.tools/assert"
 	"testing"
 )
