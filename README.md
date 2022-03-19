@@ -1,8 +1,8 @@
 
-[![CircleCI](https://circleci.com/gh/go-ml-dev/dyl.svg?style=svg)](https://circleci.com/gh/go-ml-dev/dyl)
-[![Maintainability](https://api.codeclimate.com/v1/badges/1e480a564c6ba1572581/maintainability)](https://codeclimate.com/github//go-ml-dev/dyl/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/1e480a564c6ba1572581/test_coverage)](https://codeclimate.com/github/go-ml-dev/dyl/test_coverage)
-[![Go Report Card](https://goreportcard.com/badge/github.com/go-ml-dev/dyl)](https://goreportcard.com/report/github.com/go-ml-dev/dyl)
+[![CircleCI](https://circleci.com/gh/go4ml/dyl.svg?style=svg)](https://circleci.com/gh/go4ml/dyl)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1e480a564c6ba1572581/maintainability)](https://codeclimate.com/github//go4ml/dyl/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/1e480a564c6ba1572581/test_coverage)](https://codeclimate.com/github/go4ml/dyl/test_coverage)
+[![Go Report Card](https://goreportcard.com/badge/github.com/go4ml/dyl)](https://goreportcard.com/report/github.com/go4ml/dyl)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ```golang
