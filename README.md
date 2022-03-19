@@ -26,14 +26,14 @@ import (
 )
 
 func init() {
-    urlbase := "https://github.com/go-ml-dev/nativelibs/releases/download/files/"
+    urlbase := "https://github.com/go4ml/nativelibs/releases/download/files/"
     if runtime.GOOS == "linux" && runtime.GOARCH == "amd64"{
         so := dyl.Load(
-            dyl.Cache("go-ml/dyl/libfunction.so"),
+            dyl.Cache("go4ml/dyl/libfunction.so"),
             dyl.LzmaExternal(urlbase+"libfunction_lin64.xz"))
     } else if runtime.GOOS == "windows" && runtime.GOARCH == "amd64" {
         so := dyl.Load(
-            dyl.Cache("go-ml/dyl/function.dll"),
+            dyl.Cache("go4ml/dyl/function.dll"),
             dyl.LzmaExternal(urlbase+"libfunction_win64.xz"))
     }
     so.Bind("function",unsafe.Pointer(&C._dyl_function))
