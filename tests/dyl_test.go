@@ -6,8 +6,8 @@ import (
 	"testing"
 )
 
-const baseurl = "https://github.com/go-ml-dev/nativelibs/releases/download/files/"
-const localLibSoName = "/tmp/go-ml-dyl-test/" + libSoName
+const baseurl = "https://github.com/go4ml/nativelibs/releases/download/files/"
+const localLibSoName = "/tmp/go4ml.test/" + libSoName
 const externalLibSoLzma = baseurl + libSoLzma
 const externalLibSoGzip = baseurl + libSoGzip
 const externalLibSo = baseurl + libSoName
@@ -29,13 +29,13 @@ func Test_LoadCustom(t *testing.T) {
 }
 
 func Test_LoadLzmaExternal(t *testing.T) {
-	err := dyl.Cached("go-ml/dyl/.dyl-test/loadlzmaexternal.so").Remove()
+	err := dyl.Cached("go4ml/dyl/.dyl-test/loadlzmaexternal.so").Remove()
 	assert.NilError(t, err)
 	so := dyl.Load(
 		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dyl.Cached("go-ml/dyl/.dyl-test/loadlzmaexternal.so"),
+		dyl.Cached("go4ml/dyl/.dyl-test/loadlzmaexternal.so"),
 		dyl.LzmaExternal(externalLibSoLzma))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
@@ -44,13 +44,13 @@ func Test_LoadLzmaExternal(t *testing.T) {
 }
 
 func Test_LoadGzipExternal(t *testing.T) {
-	err := dyl.Cached("go-ml/dyl/.dyl-test/loadgzipexternal" + SoExt).Remove()
+	err := dyl.Cached("go4ml/dyl/.dyl-test/loadgzipexternal" + SoExt).Remove()
 	assert.NilError(t, err)
 	so := dyl.Load(
 		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dyl.Cached("go-ml/dyl/.dyl-test/loadgzipexternal"+SoExt),
+		dyl.Cached("go4ml/dyl/.dyl-test/loadgzipexternal"+SoExt),
 		dyl.GzipExternal(externalLibSoGzip))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
@@ -59,13 +59,13 @@ func Test_LoadGzipExternal(t *testing.T) {
 }
 
 func Test_LoadUncompressedExternal(t *testing.T) {
-	err := dyl.Cached("go-ml/dyl/.dyl-test/loadexternal" + SoExt).Remove()
+	err := dyl.Cached("go4ml/dyl/.dyl-test/loadexternal" + SoExt).Remove()
 	assert.NilError(t, err)
 	so := dyl.Load(
 		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dyl.Cached("go-ml/dyl/.dyl-test/loadexternal"+SoExt),
+		dyl.Cached("go4ml/dyl/.dyl-test/loadexternal"+SoExt),
 		dyl.External(externalLibSo))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
@@ -74,9 +74,9 @@ func Test_LoadUncompressedExternal(t *testing.T) {
 }
 
 func Test_LoadCached(t *testing.T) {
-	err := dyl.Cached("go-ml/dyl/" + libSoName).Remove()
+	err := dyl.Cached("go4ml/dyl/" + libSoName).Remove()
 	assert.NilError(t, err)
-	dyl.Cached("go-ml/dyl/"+libSoName).Preload(
+	dyl.Cached("go4ml/dyl/"+libSoName).Preload(
 		dyl.LzmaExternal(externalLibSoLzma),
 		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
@@ -85,7 +85,7 @@ func Test_LoadCached(t *testing.T) {
 		dyl.OnError(func(err error) {
 			assert.NilError(t, err)
 		}),
-		dyl.Cached("go-ml/dyl/"+libSoName))
+		dyl.Cached("go4ml/dyl/"+libSoName))
 	assert.Assert(t, so.Ok())
 	*(*uintptr)(functionPtr()) = 0
 	so.Bind("function", functionPtr())
